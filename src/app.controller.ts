@@ -5,9 +5,6 @@ import { AxiosResponse } from 'axios';
 
 @Controller('posts')
 export class PostsController {
-  getHello(): any {
-    throw new Error('Method not implemented.');
-  }
   constructor(private httpService: HttpService) {}
 
   @Get()
