@@ -47,4 +47,39 @@ describe('PostsController', () => {
       },
     });
   });
+
+  it('should get post details', (done) => {
+    const postDetails = {
+      id: 1,
+      title: 'test post',
+      body: 'test body',
+      userId: 1,
+    };
+    const mockedAxiosResponse: AxiosResponse = {
+      data: postDetails,
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {
+        headers: undefined,
+      },
+    };
+
+    jest
+      .spyOn(appController, 'getPostDetails')
+      .mockImplementation(() => of(mockedAxiosResponse));
+
+    appController.getPostDetails('1').subscribe({
+      next: (val) => {
+        expect(val).toBe(postDetails);
+        done();
+      },
+      error: (err) => {
+        done(err);
+      },
+      complete: () => {
+        done();
+      },
+    });
+  });
 });
